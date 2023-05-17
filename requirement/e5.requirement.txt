@@ -1,0 +1,4 @@
+jupyterlab
+notebook
+voila>=0.4
+ipywidgets

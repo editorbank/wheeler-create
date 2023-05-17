@@ -1,0 +1,9 @@
+jinja2-cli
+jq
+
+python3-memcached
+pymemcache
+
+ldap3 # очень нужно
+
+#python-ldap #only py38 max

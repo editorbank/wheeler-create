@@ -1,0 +1,22 @@
+numpy
+pandas
+scipy
+scikit-learn
+theano
+tensorflow
+keras
+catboost
+lightgbm
+xgboost
+matplotlib
+seaborn
+pm4py
+retentioneering
+clickhouse-driver
+
+psycopg2_binary # psycopg2
+
+sqlalchemy
+nipyapi
+
+# apache-airflow # зачем ?

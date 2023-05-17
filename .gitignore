@@ -1,0 +1,5 @@
+.downloaded/
+*.log
+*.bak
+.python-embed/
+.venv/

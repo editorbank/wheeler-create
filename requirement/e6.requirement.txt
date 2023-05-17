@@ -1,0 +1,6 @@
+sqlalchemy-clickhouse
+sqlalchemy
+psycopg2_binary
+
+#engine = create_engine("postgresql+pg8000://scott:tiger@localhost/test", execution_options={ "isolation_level": "REPEATABLE READ" })
+#engine = create_engine("postgresql+psycopg2://scott:tiger@host/dbname")

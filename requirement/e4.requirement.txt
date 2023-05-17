@@ -1,0 +1,4 @@
+pytest
+hypothesis
+pipdeptree
+#numpy==1.24.2
