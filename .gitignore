@@ -1,4 +1,6 @@
-.downloaded/
+.downloaded*
+*.img
+*.docker-layers
 *.log
 *.bak
 .python-embed/
