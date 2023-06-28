@@ -1,7 +1,5 @@
 
-_config=$1
-if [ -z "${_config}" ];then _config="./project.ini";fi
-if [ ! -f "${_config}" ];then echo "Error, not found ${_config}!"; exit 1;fi
+_config="./project.ini"
 
 config_value(){
   echo $(git config -f ${_config} --get $1)
