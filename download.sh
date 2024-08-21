@@ -30,29 +30,19 @@ download_init(){
   if [ ! -d ./.pylibs ] ;then mkdir ./.pylibs;fi
   download_direct pip.pyz https://bootstrap.pypa.io/pip/pip.pyz
   
-  if [ "$OS" == "Windows_NT" ] ;then 
-    download_direct python-$PYTHON_VERSION-embed-win_amd64.zip https://www.python.org/ftp/python/$PYTHON_VERSION/python-$PYTHON_VERSION-embed-amd64.zip
-    if [ ! -d .python-embed ] ;then
-      powershell -Command "Expand-Archive ./.pylibs/python-$PYTHON_VERSION-embed-win_amd64.zip -DestinationPath .python-embed"
-      if [ ! -f .python-embed/$PTH_NAME._pth.bak ] ;then
-        mv .python-embed/$PTH_NAME._pth .python-embed/$PTH_NAME._pth.bak
-        echo Lib/site-packages>.python-embed/$PTH_NAME._pth
-        cat .python-embed/$PTH_NAME._pth.bak>>.python-embed/$PTH_NAME._pth
-      fi
-      .python-embed/python.exe ./.pylibs/pip.pyz install --upgrade virtualenv pip
-      #.python-embed/python.exe -m pip install --upgrade pip
-    fi
-    if [ ! -d .venv ] ;then
-      #export PYTHONPATH=.python-embed/Lib/site-packages
-      .python-embed/python.exe -m virtualenv .venv
-    fi
-    source .venv/Scripts/activate
-    python --version
-    pip3 --require-virtualenv --version
-    export PIP_EXE="pip3 --require-virtualenv"
+  download_direct python-$PYTHON_VERSION-embed-win_amd64.zip https://www.python.org/ftp/python/$PYTHON_VERSION/python-$PYTHON_VERSION-embed-amd64.zip
+  if [ ! -d .venv ] ;then  python3 -m virtualenv .venv ; fi
+  if [ ! -f .venv/bin/activate ] ;then echo "Error create .venv!" ; exit 1 ; fi
+  source .venv/bin/activate
+  if [ ! -n "$VIRTUAL_ENV" ] ;then echo "Error activate virtual environment!" ; exit 1 ; fi
+
+  if [ ! -f "$VIRTUAL_ENV/pip_upgrade.tmp" ] ;then
+    python -m pip install --upgrade pip && pip --version >"$VIRTUAL_ENV/pip_upgrade.tmp"
   fi
 
-  
+  python --version
+  pip --require-virtualenv --version
+  export PIP_EXE="pip --require-virtualenv"
 }
 
 download_cmd(){
@@ -86,7 +76,7 @@ main(){
   for param in $@; do
     download_item $param
   done
-  ./make_links_log.sh
+  . ./make_links_log.sh
 }
 
 main $@ && echo $0 - OK || echo $0 - FAIL
