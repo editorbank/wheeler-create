@@ -1,6 +1,0 @@
-dbt-core
-dbt-clickhouse
-dbt-postgres
-dbt-sqlite
-
-python-arango

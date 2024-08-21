@@ -8,7 +8,7 @@ fi
 [ -d .venv ] && rm -r .venv
 [ -d .python-embed ] && rm -r .python-embed
 
-for i in $(git ls-files --others --ignored --exclude-standard|grep -v .downloaded); do
+for i in $(git ls-files --others --ignored --exclude-standard|grep -v '.pylibs'); do
   rm $i
 done
 

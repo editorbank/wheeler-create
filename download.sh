@@ -1,5 +1,8 @@
 #!/bin/env bash
 
+PIP_EXE="python3 ./.pylibs/pip.pyz"
+PYTHON_VERSION="3.10.10"
+PTH_NAME="python310"
 
 set -e
 
@@ -14,29 +17,30 @@ For example:
 "
   exit 1;
 }
+
 download_direct(){
-  if [ ! -f ./.downloaded/$1 ] ;then 
-    echo Download $1 ...
-    curl --fail -o ./.downloaded/$1 $2||exit 1
+  if [ ! -f ./.pylibs/$1 ] ;then 
+    echo Download $2 to $1 ...
+    echo Found link $2 >>$0.log
+    curl -ks --fail -o ./.pylibs/$1 $2||exit 1
   fi
 }
 
-PIP_EXE="python3 ./.downloaded/pip.pyz"
-
 download_init(){
-  if [ ! -d ./.downloaded ] ;then mkdir ./.downloaded;fi
+  if [ ! -d ./.pylibs ] ;then mkdir ./.pylibs;fi
   download_direct pip.pyz https://bootstrap.pypa.io/pip/pip.pyz
   
   if [ "$OS" == "Windows_NT" ] ;then 
-    download_direct python-3.10.10-embed-win_amd64.zip https://www.python.org/ftp/python/3.10.10/python-3.10.10-embed-amd64.zip
+    download_direct python-$PYTHON_VERSION-embed-win_amd64.zip https://www.python.org/ftp/python/$PYTHON_VERSION/python-$PYTHON_VERSION-embed-amd64.zip
     if [ ! -d .python-embed ] ;then
-      powershell -Command "Expand-Archive .downloaded/python-3.10.10-embed-win_amd64.zip -DestinationPath .python-embed"
-      if [ ! -f .python-embed/python310._pth.bak ] ;then
-        mv .python-embed/python310._pth .python-embed/python310._pth.bak
-        echo Lib/site-packages>.python-embed/python310._pth
-        cat .python-embed/python310._pth.bak>>.python-embed/python310._pth
+      powershell -Command "Expand-Archive ./.pylibs/python-$PYTHON_VERSION-embed-win_amd64.zip -DestinationPath .python-embed"
+      if [ ! -f .python-embed/$PTH_NAME._pth.bak ] ;then
+        mv .python-embed/$PTH_NAME._pth .python-embed/$PTH_NAME._pth.bak
+        echo Lib/site-packages>.python-embed/$PTH_NAME._pth
+        cat .python-embed/$PTH_NAME._pth.bak>>.python-embed/$PTH_NAME._pth
       fi
-      .python-embed/python.exe .downloaded/pip.pyz install virtualenv pip
+      .python-embed/python.exe ./.pylibs/pip.pyz install --upgrade virtualenv pip
+      #.python-embed/python.exe -m pip install --upgrade pip
     fi
     if [ ! -d .venv ] ;then
       #export PYTHONPATH=.python-embed/Lib/site-packages
@@ -52,8 +56,10 @@ download_init(){
 }
 
 download_cmd(){
+  echo Download for $@ ...
   local PIP_OPTS="--no-cache-dir --extra-index-url https://download.pytorch.org/whl/cu118"
-  $PIP_EXE download $PIP_OPTS --log $0.$RANDOM.log -d ./.downloaded $@
+  $PIP_EXE download -vvv $PIP_OPTS -d ./.pylibs $@ 2>&1 >>$0.log
+  # $PIP_EXE download -vvv $PIP_OPTS --log $0.$RANDOM.log -d ./.pylibs $@ 2>&1 >/dev/null 
 }
 
 download_item(){
@@ -80,6 +86,7 @@ main(){
   for param in $@; do
     download_item $param
   done
+  ./make_links_log.sh
 }
 
-main $@ && echo OK || echo FAIL
+main $@ && echo $0 - OK || echo $0 - FAIL

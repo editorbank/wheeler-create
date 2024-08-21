@@ -1,9 +1,5 @@
-FROM ubuntu
-RUN apt update &&\
-  apt install -y python3 python3-pip python3.10-venv &&\
-  apt clean
+FROM ubuntu/python:3.10-22.04_stable
+COPY ./.pylibs /pylibs
 
-#ENTRYPOINT ["python3","-m","http.server","-d","/pylibs","8080"]
-#EXPOSE 8080
-
-COPY ./.downloaded /pylibs
+EXPOSE 8080
+CMD ["exec", "python3", "-m", "http.server", "-d", "/pylibs", "8080"]

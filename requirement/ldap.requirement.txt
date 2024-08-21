@@ -1,6 +1,3 @@
-jinja2-cli
-jq
-
 python3-memcached
 pymemcache
 

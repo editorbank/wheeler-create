@@ -1,4 +1,4 @@
-.downloaded/
+.pylibs/
 *.log
 *.bak
 .python-embed/

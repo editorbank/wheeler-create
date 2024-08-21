@@ -1,0 +1,9 @@
+jinja2-cli
+jq
+
+pip
+setuptools
+pipdeptree
+
+pytest
+hypothesis

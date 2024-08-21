@@ -1,0 +1,34 @@
+datetime
+keras
+lightgbm
+matplotlib
+nipyapi
+numpy
+optuna
+pandas
+pm4py
+psycopg2_binary # psycopg2
+retentioneering
+scikit-learn
+scipy
+seaborn
+
+sqlalchemy
+clickhouse-driver[numpy]
+clickhouse-connect
+clickhouse-sqlalchemy
+sqlalchemy-clickhouse
+psycopg2_binary
+
+#engine = create_engine("postgresql+pg8000://scott:tiger@localhost/test", execution_options={ "isolation_level": "REPEATABLE READ" })
+#engine = create_engine("postgresql+psycopg2://scott:tiger@host/dbname")
+#from sqlalchemy import create_engine, Column, MetaData, literal
+#from clickhouse_sqlalchemy import Table, make_session, get_declarative_base, types, engines
+#engine = create_engine('clickhouse://default:@localhost/test')
+
+#functools
+#scikit-learn # sklearn
+#json
+#tqdm
+#yaml
+# apache-airflow # зачем ?
