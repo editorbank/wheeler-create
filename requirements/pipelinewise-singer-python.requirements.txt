@@ -1,0 +1,1 @@
+git+https://github.com/transferwise/pipelinewise-singer-python.git@da64a10cdbcad48ab373d4dab3d9e6dd6f58556b

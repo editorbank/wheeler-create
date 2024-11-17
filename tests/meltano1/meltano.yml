@@ -1,0 +1,78 @@
+version: 1
+project_id: 1f2dff75-0d9d-4435-a435-123df2b6ba4f
+
+default_environment: default
+environments:
+- name: default
+
+plugins:
+
+  extractors:
+
+  - name: tap-csv
+    variant: meltanolabs
+    pip_url: tap-csv
+    #pip_url: ../whl/tap-csv-1.1.0.zip
+
+  - name: tap-clickhouse
+    variant: akurdyukov
+    pip_url: akurdyukov-tap-clickhouse
+    #pip_url: git+https://github.com/akurdyukov/tap-clickhouse.git
+
+  - name: tap-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-tap-postgres
+    #pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
+
+  - name: tap-rest-api-msdk
+    variant: widen
+    pip_url: tap-rest-api-msdk
+
+  - name: tap-kafka
+    variant: transferwise
+    pip_url: pipelinewise-singer-python pipelinewise-tap-kafka
+    #pip_url: git+https://github.com/transferwise/pipelinewise-singer-python.git@da64a10cdbcad48ab373d4dab3d9e6dd6f58556b pipelinewise-tap-kafka
+
+  - name: tap-s3-csv
+    variant: transferwise
+    pip_url: pipelinewise-tap-s3-csv
+
+  loaders:
+
+  - name: target-csv
+    variant: meltanolabs
+    pip_url: target-csv
+    #pip_url: ../whl/target-csv-0.0.1.zip
+
+  - name: target-kafka
+    namespace: target_kafka
+    pip_url: target-kafka
+    executable: target-kafka
+
+  - name: target-clickhouse
+    variant: shaped-ai
+    pip_url: shaped-target-clickhouse
+    #pip_url: git+https://github.com/shaped-ai/target-clickhouse.git
+
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-target-postgres
+
+  - name: target-s3-csv
+    variant: transferwise
+    pip_url: pipelinewise-target-s3-csv
+    #pip_url: git+https://github.com/transferwise/pipelinewise-target-s3-csv.git
+
+  mappers:
+
+  - name: meltano-map-transformer
+    variant: meltano
+    #pip_url: meltano-map-transform
+    pip_url: /home/ed/work/meltano-test/whl/meltano-map-transform-0.9.0.zip 
+    #pip_url: git+https://github.com/MeltanoLabs/meltano-map-transform.git
+    executable: meltano-map-transform
+
+  - name: transform-field
+    variant: transferwise
+    pip_url: pipelinewise-transform-field
+

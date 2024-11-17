@@ -3,7 +3,7 @@ keras
 lightgbm
 matplotlib
 nipyapi
-numpy
+numpy<2.0.0
 optuna
 pandas
 pm4py

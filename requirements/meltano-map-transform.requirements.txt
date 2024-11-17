@@ -1,0 +1,3 @@
+git+https://github.com/MeltanoLabs/meltano-map-transform.git
+poetry-core==1.8.1
+poetry-dynamic-versioning==1.2

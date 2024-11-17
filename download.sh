@@ -10,8 +10,8 @@ print_help_and_exit(){
   echo -e "\
 Use: $(basename $0) <libname|requirement_file|folder_with_requirement_files>\n\
 For example:
-  $0 ./requirement\n\
-  $0 ./requirement/a1.requirement.txt\n\
+  $0 ./requirements\n\
+  $0 ./requirements/a1.requirements.txt\n\
   $0 numpy\n\
   $0 numpy==1.24.3\n\
 "
@@ -21,13 +21,14 @@ For example:
 download_direct(){
   if [ ! -f ./.pylibs/$1 ] ;then 
     echo Download $2 to $1 ...
-    echo Found link $2 >>$0.log
+    echo Found link $2 >>.log/$0.log
     curl -ks --fail -o ./.pylibs/$1 $2||exit 1
   fi
 }
 
 download_init(){
-  if [ ! -d ./.pylibs ] ;then mkdir ./.pylibs;fi
+  if [ ! -d ./.log ] ; then mkdir ./.log ; fi
+  if [ ! -d ./.pylibs ] ; then mkdir ./.pylibs ; fi
   download_direct pip.pyz https://bootstrap.pypa.io/pip/pip.pyz
   
   download_direct python-$PYTHON_VERSION-embed-win_amd64.zip https://www.python.org/ftp/python/$PYTHON_VERSION/python-$PYTHON_VERSION-embed-amd64.zip
@@ -47,15 +48,15 @@ download_init(){
 
 download_cmd(){
   echo Download for $@ ...
-  local PIP_OPTS="--no-cache-dir --extra-index-url https://download.pytorch.org/whl/cu118"
-  $PIP_EXE download -vvv $PIP_OPTS -d ./.pylibs $@ 2>&1 >>$0.log
-  # $PIP_EXE download -vvv $PIP_OPTS --log $0.$RANDOM.log -d ./.pylibs $@ 2>&1 >/dev/null 
+  #local PIP_OPTS="--no-cache-dir --extra-index-url https://download.pytorch.org/whl/cu118"
+  local PIP_OPTS=""
+  $PIP_EXE download -qqq $PIP_OPTS -d ./.pylibs --log .log/$RANDOM$RANDOM$RANDOM.log $@
 }
 
 download_item(){
   local param="$1"
   if [ -d "$param" ] ;then 
-    local declare requirement_list=$(find "$param" -iname "*requirement.txt"|sort)
+    local declare requirement_list=$(find "$param" -iname "*requirements.txt"|sort)
     for requirement_file in $requirement_list; do
       download_cmd -r $requirement_file
     done
