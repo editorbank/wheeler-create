@@ -28,5 +28,5 @@ if [ -f requirements.txt -a ! -f ".venv/requirements.log" ] ; then
   pip --require-virtualenv install -qqq --log ".venv/requirements.log" -r requirements.txt 
 fi
 
-python test1.py
+pytest tests
 echo OK

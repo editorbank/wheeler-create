@@ -1,2 +1,4 @@
 pandas
 numpy<2.0.0
+openpyxl
+pytest
