@@ -1,6 +1,8 @@
 set -e
+WHELLER_DIR="${WHELLER_DIR:-$(realpath ../../.pylibs)}"
+if [ -z "${WHELLER_DIR}" -o ! -d "${WHELLER_DIR}" ] ; then 1>&2 echo Not set or not exists WHELLER_DIR!; exit 1 ; fi
+export WHELLER_DIR
 venv_dir="$PWD/.venv"
-whl_dir="$(realpath -m .pylibs)"
 PIP_CONFIG_FILE="$venv_dir/pip.ini"
 
 if [ -f requirements.txt -a ! -d "$venv_dir" ] ; then
@@ -11,13 +13,13 @@ fi
 if [ -f "$venv_dir/bin/activate" ] ; then source "$venv_dir/bin/activate" ; fi
 if [ -z "$VIRTUAL_ENV" ] ; then >&2 echo "Not init virtual environment!" ; exit 1 ; fi
 
-if [ -d "$whl_dir" -a ! -f "$PIP_CONFIG_FILE" ] ; then
-  echo Found local whl dir "$whl_dir".
+if [ -d "${WHELLER_DIR:-}" -a ! -f "$PIP_CONFIG_FILE" ] ; then
+  echo "Found local WHELLER_DIR=\"$WHELLER_DIR\"."
   echo Create pip.ini ...
   cat <<EOF>"$PIP_CONFIG_FILE"
 [global]
 no-index=true
-find-links=$whl_dir
+find-links=$WHELLER_DIR
 EOF
 fi
 

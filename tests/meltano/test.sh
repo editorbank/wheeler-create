@@ -1,4 +1,4 @@
-cd "$(realpath -m $0/..)"
+set -e
 . ../../ve.sh
 
 meltano lock --update --all
