@@ -1,5 +1,5 @@
 set -e
-export WHELLER_DIR="${WHELLER_DIR:-$(realpath .pylibs)}"
+export WHEELER_DIR="${WHEELER_DIR:-$(realpath .pylibs)}"
 this_dir=$PWD
 test_list=$(find tests -maxdepth 2 -type f -name test.sh)
 for i in $test_list ; do
