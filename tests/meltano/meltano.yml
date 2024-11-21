@@ -30,11 +30,12 @@ plugins:
 
   - name: tap-kafka
     variant: transferwise
-    pip_url: $WHEELER_DIR/pipelinewise-tap-kafka
-    #pip_url: pipelinewise-tap-kafka pipelinewise-singer-python
+    # pip_url: pipelinewise-tap-kafka pipelinewise_transform_field
+    # pip_url: $WHEELER_DIR/pipelinewise-tap-kafka $WHEELER_DIR/pipelinewise_transform_field-2.3.0-py3-none-any.whl
+    pip_url: pipelinewise-tap-kafka pipelinewise-singer-python
     #pip_url: C:\\Users\\ed\\work\\wheeler-create.oneimage\\.pylibs\\pipelinewise_transform_field-2.3.0-py3-none-any.whl
     #pip_url: ..\\..\\.pylibs\\pipelinewise_transform_field-2.3.0-py3-none-any.whl
-    #pip_url: git+https://github.com/transferwise/pipelinewise-singer-python.git@da64a10cdbcad48ab373d4dab3d9e6dd6f58556b pipelinewise-tap-kafka
+    # pip_url: git+https://github.com/transferwise/pipelinewise-singer-python.git@da64a10cdbcad48ab373d4dab3d9e6dd6f58556b pipelinewise-tap-kafka
 
   - name: tap-s3-csv
     variant: transferwise
@@ -50,6 +51,7 @@ plugins:
   - name: target-kafka
     namespace: target_kafka
     pip_url: target-kafka
+    # pip_url: git+https://github.com/reidlai/target-kafka.git
     executable: target-kafka
 
   - name: target-clickhouse
@@ -70,9 +72,10 @@ plugins:
 
   - name: meltano-map-transformer
     variant: meltano
-    pip_url: $WHEELER_DIR/meltano-map-transform-0.9.0.zip
+    pip_url: meltano-map-transform
+    # pip_url: $WHEELER_DIR/meltano-map-transform-0.9.1.zip
     #pip_url: /home/ed/work/meltano-test/whl/meltano-map-transform-0.9.0.zip
-    #pip_url: git+https://github.com/MeltanoLabs/meltano-map-transform.git
+    # pip_url: git+https://github.com/MeltanoLabs/meltano-map-transform.git
     executable: meltano-map-transform
 
   - name: transform-field

@@ -51,13 +51,12 @@
   @pip --require-virtualenv --version
   @set PIP_EXE=pip3 --require-virtualenv
   @set VIRTUAL
-  pause
 @goto :eof
 
 :download_cmd
   @echo Download for %* ...
   ::@set PIP_OPTS=--no-cache-dir --extra-index-url https://download.pytorch.org/whl/cu118
-  @set PIP_OPTS=
+  @set PIP_OPTS= --exists-action i
   @%PIP_EXE% download -qqq --log .\.log\%RANDOM%%RANDOM%%RANDOM%.log %PIP_OPTS% -d .\.pylibs %*
   @if %ERRORLEVEL% neq 0 (echo PIP_ERROR:%ERRORLEVEL% & exit /b %ERRORLEVEL%)
   :: @%PIP_EXE% download -vvv %PIP_OPTS% --log %~nx0.%RANDOM%.log -d .\.pylibs %* 2>&1 >nul 
