@@ -18,12 +18,15 @@
 :download_direct
   @if exist .\.pylibs\%1 @goto :eof
   @echo Download %2 to %1 ...
-  @echo Found link %2 >>%~nx0.log
+  @echo Found link %2 >>.\.log\%RANDOM%%RANDOM%%RANDOM%.log
   @curl -ks --fail -o .\.pylibs\%1 %2
   @if %ERRORLEVEL% neq 0 (echo CURL_ERROR:%ERRORLEVEL% & exit /b %ERRORLEVEL%)
 @goto :eof
 
 :download_init
+  @set PYTHONHOME=
+  @set PYTHONPATH=
+  @if not exist .\.log md .\.log
   @if not exist .\.pylibs md .\.pylibs
   @call :download_direct pip.pyz https://bootstrap.pypa.io/pip/pip.pyz
   @call :download_direct python-%PYTHON_VERSION%-embed-win_amd64.zip https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-embed-amd64.zip
@@ -34,22 +37,28 @@
       @echo Lib\site-packages>.python-embed\%PTH_NAME%._pth
       @type .python-embed\%PTH_NAME%._pth.bak>>.python-embed\%PTH_NAME%._pth
     :download_init_4
+    @set PYTHONPATH=
     .python-embed\python.exe .\.pylibs\pip.pyz install --upgrade virtualenv
+    .python-embed\python.exe .\.pylibs\pip.pyz install --upgrade pip
     ::.python-embed\python.exe .\.pylibs\pip.pyz install --upgrade virtualenv pip
     ::.python-embed\python.exe -m pip install --upgrade pip
   :download_init_2
   @if not exist .venv .python-embed\python.exe -m virtualenv .venv
   @call .venv\Scripts\activate
   @python --version
-  @pip3 --require-virtualenv --version
+  @pip --require-virtualenv --version
+  @python -m pip --require-virtualenv install --upgrade pip
+  @pip --require-virtualenv --version
   @set PIP_EXE=pip3 --require-virtualenv
   @set VIRTUAL
+  pause
 @goto :eof
 
 :download_cmd
   @echo Download for %* ...
-  @set PIP_OPTS=--no-cache-dir --extra-index-url https://download.pytorch.org/whl/cu118
-  @%PIP_EXE% download -vvv %PIP_OPTS% -d .\.pylibs %* 2>>&1 >>%~nx0.log
+  ::@set PIP_OPTS=--no-cache-dir --extra-index-url https://download.pytorch.org/whl/cu118
+  @set PIP_OPTS=
+  @%PIP_EXE% download -qqq --log .\.log\%RANDOM%%RANDOM%%RANDOM%.log %PIP_OPTS% -d .\.pylibs %*
   @if %ERRORLEVEL% neq 0 (echo PIP_ERROR:%ERRORLEVEL% & exit /b %ERRORLEVEL%)
   :: @%PIP_EXE% download -vvv %PIP_OPTS% --log %~nx0.%RANDOM%.log -d .\.pylibs %* 2>&1 >nul 
 @goto :eof
