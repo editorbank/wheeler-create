@@ -11,8 +11,8 @@ plugins:
 
   - name: tap-csv
     variant: meltanolabs
-    #pip_url: tap-csv
-    pip_url: $WHEELER_DIR/tap-csv-1.1.0.zip
+    pip_url: tap-csv
+    # pip_url: $WHEELER_DIR/tap-csv-1.1.0.zip
 
   - name: tap-clickhouse
     variant: akurdyukov
@@ -82,3 +82,9 @@ plugins:
     variant: transferwise
     pip_url: pipelinewise-transform-field
 
+auto_install: false
+cli:
+  log_level: debug
+hub_api_root: http://localhost
+hub_url_auth: http://localhost
+hub_url: http://localhost
