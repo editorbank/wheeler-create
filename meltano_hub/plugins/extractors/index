@@ -1,0 +1,34 @@
+{
+  "tap-csv": {
+    "logo_url": ""
+    ,"default_variant": "meltanolabs"
+    ,"variants": {"meltanolabs":{"ref":"http://localhost:8000/plugins/extractors/tap-csv--meltanolabs.lock"}}
+  }
+  ,"tap-clickhouse": {
+    "logo_url": ""
+    ,"default_variant": "akurdyukov"
+    ,"variants": {"akurdyukov":{"ref":"http://localhost:8000/plugins/extractors/tap-clickhouse--akurdyukov.lock"}}
+  }
+  ,"tap-postgres": {
+    "logo_url": ""
+    ,"default_variant": "meltanolabs"
+    ,"variants": {"meltanolabs":{"ref":"http://localhost:8000/plugins/extractors/tap-postgres--meltanolabs.lock"}}
+  }
+  ,"tap-rest-api-msdk": {
+    "logo_url": ""
+    ,"default_variant": "widen"
+    ,"variants": {"widen":{"ref":"http://localhost:8000/plugins/extractors/tap-rest-api-msdk--widen.lock"}}
+  }
+  ,"tap-kafka": {
+    "logo_url": ""
+    ,"default_variant": "transferwise"
+    ,"variants": {"transferwise":{"ref":"http://localhost:8000/plugins/extractors/tap-kafka--transferwise.lock"}}
+  }
+  
+  ,"tap-s3-csv": {
+    "logo_url": ""
+    ,"default_variant": "transferwise"
+    ,"variants": {"transferwise":{"ref":"http://localhost:8000/plugins/extractors/tap-s3-csv--transferwise.lock"}}
+  }
+  
+}

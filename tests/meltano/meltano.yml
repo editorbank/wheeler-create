@@ -85,6 +85,7 @@ plugins:
 auto_install: false
 cli:
   log_level: debug
-hub_api_root: http://localhost
-hub_url_auth: http://localhost
-hub_url: http://localhost
+hub_api_root: http://localhost:8000
+hub_url_auth: http://localhost:8000
+hub_url: http://localhost:8000
+project_readonly: true

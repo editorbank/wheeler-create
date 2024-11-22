@@ -49,7 +49,7 @@ download_init(){
 download_cmd(){
   echo Download for $@ ...
   #local PIP_OPTS="--no-cache-dir --extra-index-url https://download.pytorch.org/whl/cu118"
-  local PIP_OPTS=""
+  local PIP_OPTS=" --exists-action i"
   $PIP_EXE download -qqq $PIP_OPTS -d ./.pylibs --log .log/$RANDOM$RANDOM$RANDOM.log $@
 }
 
@@ -77,7 +77,7 @@ main(){
   for param in $@; do
     download_item $param
   done
-  . ./make_links_log.sh
+  # . ./make_links_log.sh
 }
 
 main $@ && echo $0 - OK || echo $0 - FAIL
