@@ -83,9 +83,11 @@ plugins:
     pip_url: pipelinewise-transform-field
 
 auto_install: false
-cli:
-  log_level: debug
+#cli:
+#  log_level: debug
 hub_api_root: http://localhost:8000
 hub_url_auth: http://localhost:8000
 hub_url: http://localhost:8000
 project_readonly: true
+send_anonymous_usage_stats: false
+

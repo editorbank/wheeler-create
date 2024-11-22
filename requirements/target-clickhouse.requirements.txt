@@ -1,1 +1,2 @@
-git+https://github.com/shaped-ai/target-clickhouse.git
+#git+https://github.com/shaped-ai/target-clickhouse.git
+https://github.com/shaped-ai/target-clickhouse/releases/download/v0.2.5/shaped_target_clickhouse-0.2.5-py3-none-any.whl
