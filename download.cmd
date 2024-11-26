@@ -26,30 +26,16 @@
 :download_init
   @set PYTHONHOME=
   @set PYTHONPATH=
+  @set PIP_CONFIG_FILE=
   @if not exist .\.log md .\.log
   @if not exist .\.pylibs md .\.pylibs
-  @call :download_direct pip.pyz https://bootstrap.pypa.io/pip/pip.pyz
-  @call :download_direct python-%PYTHON_VERSION%-embed-win_amd64.zip https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-embed-amd64.zip
-  @if exist .python-embed\python.exe goto :download_init_2
-    @powershell -Command "Expand-Archive .\.pylibs\python-%PYTHON_VERSION%-embed-win_amd64.zip -DestinationPath .python-embed"
-    @if exist .python-embed\%PTH_NAME%._pth.bak goto :download_init_4
-      @move  .python-embed\%PTH_NAME%._pth .python-embed\%PTH_NAME%._pth.bak
-      @echo Lib\site-packages>.python-embed\%PTH_NAME%._pth
-      @type .python-embed\%PTH_NAME%._pth.bak>>.python-embed\%PTH_NAME%._pth
-    :download_init_4
-    @set PYTHONPATH=
-    .python-embed\python.exe .\.pylibs\pip.pyz install --upgrade virtualenv
-    .python-embed\python.exe .\.pylibs\pip.pyz install --upgrade pip
-    ::.python-embed\python.exe .\.pylibs\pip.pyz install --upgrade virtualenv pip
-    ::.python-embed\python.exe -m pip install --upgrade pip
-  :download_init_2
-  @if not exist .venv .python-embed\python.exe -m virtualenv .venv
-  @call .venv\Scripts\activate
-  @python --version
-  @pip --require-virtualenv --version
+
+  @call python4win.activate.cmd
+  
   @python -m pip --require-virtualenv install --upgrade pip
   @pip --require-virtualenv --version
-  @set PIP_EXE=pip3 --require-virtualenv
+
+  @set PIP_EXE=pip --require-virtualenv
   @set VIRTUAL
 @goto :eof
 

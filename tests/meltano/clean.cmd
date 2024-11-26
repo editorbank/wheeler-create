@@ -1,2 +1,2 @@
 cd /d "%~dp0"
-git clean -xdf
+git clean -xdfq

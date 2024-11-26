@@ -1,5 +1,7 @@
 .pylibs/
 *.log
 *.bak
-.python-embed/
 .venv/
+.python_tmp_installer.exe
+.python_tmp_installed/
+.python.win/
