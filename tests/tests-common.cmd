@@ -1,6 +1,6 @@
 ::set py_embed=..\..\.python-embed\python.exe
 @set py_embed=..\..\.python.win\python.exe
-@set venv_dir=%CD%\.venv
+@set venv_dir=%CD%\.venv.win
 @set venv_act=%venv_dir%\Scripts\activate.bat
 
 ::if not defined WHEELER_DIR 
