@@ -1,6 +1,7 @@
 .pylibs/
 *.log
 *.bak
+*.tmp
 .venv/
 .venv.win/
 .python_tmp_installer.exe
