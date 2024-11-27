@@ -2,6 +2,7 @@
 *.log
 *.bak
 .venv/
+.venv.win/
 .python_tmp_installer.exe
 .python_tmp_installed/
 .python.win/

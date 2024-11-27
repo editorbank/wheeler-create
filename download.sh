@@ -29,10 +29,10 @@ download_direct(){
 download_init(){
   if [ ! -d ./.log ] ; then mkdir ./.log ; fi
   if [ ! -d ./.pylibs ] ; then mkdir ./.pylibs ; fi
-  download_direct pip.pyz https://bootstrap.pypa.io/pip/pip.pyz
+  #download_direct pip.pyz https://bootstrap.pypa.io/pip/pip.pyz
   
-  download_direct python-$PYTHON_VERSION-embed-win_amd64.zip https://www.python.org/ftp/python/$PYTHON_VERSION/python-$PYTHON_VERSION-embed-amd64.zip
-  if [ ! -d .venv ] ;then  python3 -m virtualenv .venv ; fi
+  #download_direct python-$PYTHON_VERSION-embed-win_amd64.zip https://www.python.org/ftp/python/$PYTHON_VERSION/python-$PYTHON_VERSION-embed-amd64.zip
+  if [ ! -d .venv ] ;then  python3 -m venv .venv ; fi
   if [ ! -f .venv/bin/activate ] ;then echo "Error create .venv!" ; exit 1 ; fi
   source .venv/bin/activate
   if [ ! -n "$VIRTUAL_ENV" ] ;then echo "Error activate virtual environment!" ; exit 1 ; fi
