@@ -1,9 +1,0 @@
-meltano
-wheel
-sde
-pip
-poetry
-pipx
-pytest
-jq
-yq
