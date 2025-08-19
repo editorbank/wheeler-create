@@ -8,6 +8,6 @@ def main(lines):
         NAME = line.strip()
         URL =  url_escape(NAME)
         BODY += '<li><a href="'+URL+'">'+NAME+'</a></li>'+EOL
-    return """<html>"""+EOL+BODY+"""</html>"""+EOL
+    return """<!doctype html><html>"""+EOL+BODY+"""</html>"""+EOL
 
 if __name__ == "__main__" : sys.stdout.write(main(sys.stdin.readlines()))
