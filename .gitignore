@@ -2,8 +2,12 @@
 *.log
 *.bak
 *.tmp
+
 *.pyc
 **/.venv
+**/__pycache__
+**/.pytest_cache
+
 .venv.win/
 .python_tmp_installer.exe
 .python_tmp_installed/
