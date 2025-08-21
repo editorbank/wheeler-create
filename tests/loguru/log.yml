@@ -1,0 +1,52 @@
+version: 1
+formatters:
+    sensitive:
+        class: SensitiveFormatter.SensitiveFormatter
+        format: "%(asctime)s [%(levelname).3s] [%(name)s] %(message)s (%(filename)s#%(lineno)d)"
+
+    masked:
+        (): MaskingFormatter.MaskingFormatter
+        format: "%(asctime)s [%(levelname).3s] [%(name)s] %(message)s (%(filename)s#%(lineno)d)"
+        secrets:
+          - ABCDEF
+        placeholder: "**hidden**"
+
+handlers:
+
+    none:
+        class: logging.NullHandler
+
+    console:
+        class: logging.StreamHandler
+        formatter: masked
+        #stream: ext://sys.stdout  # Default is stderr
+
+    file:
+        class: logging.FileHandler
+        formatter: masked
+        level: DEBUG
+        filename: file.log
+loggers:
+    root:
+        level: ERROR
+        propagate: false
+        handlers:
+            - none
+            - console
+            - file
+    __main__:
+        #level: NONE
+        handlers:
+            - console
+        #    - file
+    the_module:
+        propagate: false
+        level: DEBUG
+        handlers:
+            - console
+            - file
+    MaskingFormatter:
+        propagate: false
+        level: DEBUG
+        handlers:
+            - console

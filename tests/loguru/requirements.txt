@@ -1,3 +1,4 @@
 loguru
+python-yaml
 
 pytest

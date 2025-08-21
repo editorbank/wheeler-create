@@ -1,0 +1,21 @@
+version: 1
+formatters:
+    masked:
+        (): MaskingFormatter.MaskingFormatter
+        format: "%(asctime)s [%(levelname).3s] [%(name)s] %(message)s (%(filename)s#%(lineno)d)"
+        secrets:
+          - ABCDEF
+        placeholder: "**hidden**"
+
+handlers:
+
+    default:
+        class: logging.StreamHandler
+        formatter: masked
+        #stream: ext://sys.stdout  # Default is stderr
+loggers:
+    root:
+        level: ERROR
+        propagate: false
+        handlers:
+            - default

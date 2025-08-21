@@ -7,10 +7,7 @@ def sh(cmd):
         raise Exception(result.stderr)
 
 def test_1():
-    sh("python -B ./test_service.py start")
-    sh("python -B ./test_service.py status")
-    sh("python -B ./test_service.py stop")
-    sh("python -B ./test_service.py status")
+    sh("python -B ./test_scikit-learn.py")
 
 if __name__ == "__main__":
     test_1()
